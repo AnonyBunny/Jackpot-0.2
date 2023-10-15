@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/Redgrave/Scripts/Movement.gd" type="Script" id=1]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.4, 1, 0.4 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 0.8, 2, 0.8 )
+
+[node name="KinematicBody" type="KinematicBody"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 5.76893, 2.57725 )
+fov = 90.0
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 2 )
+
+[node name="User Interface" type="Node" parent="."]
+
+[node name="Hotbar Inventory" type="GridContainer" parent="User Interface"]
+margin_left = 384.0
+margin_top = 560.0
+margin_right = 640.0
+margin_bottom = 600.0
+
+[node name="Pause Menu" type="VBoxContainer" parent="User Interface"]
+visible = false
+margin_left = 384.0
+margin_top = 264.0
+margin_right = 640.0
+margin_bottom = 344.0
+custom_constants/separation = 40
+
+[node name="Resume" type="Button" parent="User Interface/Pause Menu"]
+margin_right = 256.0
+margin_bottom = 20.0
+text = "Resume"
+
+[node name="Quit" type="Button" parent="User Interface/Pause Menu"]
+margin_top = 60.0
+margin_right = 256.0
+margin_bottom = 80.0
+text = "Quit"
+
+[connection signal="pressed" from="User Interface/Pause Menu/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="User Interface/Pause Menu/Quit" to="." method="_on_Quit_pressed"]
